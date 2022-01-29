@@ -69,8 +69,10 @@ public class PlayerManager : MonoBehaviour
                 break;
             default:
                 return;
+                //vectorDirection = Vector3Int.zero;
+                //break;
         }
-        playerTilePos += vectorDirection;
+        playerTilePos = playerTilePos + vectorDirection;
         player.transform.Translate(vectorDirection);
         gameManager.debugPosText.text = string.Format("({0}, {1})", playerTilePos.x, playerTilePos.y);
         tileManager.UpdateTileManager();

@@ -24,8 +24,10 @@ public class TileManager : MonoBehaviour
     void Update()
     {
         string message = "Tiles:";
-        Vector3Int playerpos = groundTilemap.WorldToCell(player.transform.position);
-        TileBase tile = groundTilemap.GetTile(playerpos);
+        Vector3Int playerPos = groundTilemap.WorldToCell(player.transform.position);
+        //Vector3Int playerpos = groundTilemap.WorldToCell(player.transform.position);
+        message = playerPos + " " + message + "\n";
+        TileBase tile = groundTilemap.GetTile(playerPos);
         if (tile == null)
         {
             message += "null";
@@ -39,17 +41,29 @@ public class TileManager : MonoBehaviour
 
     public void UpdateTileManager()
     {
-        string message = "Tiles:";
+        string message = "ground tiles: ";
         Vector3Int playerpos = groundTilemap.WorldToCell(player.transform.position);
-        TileBase tile = groundTilemap.GetTile(playerpos);
-        if (tile == null)
+        TileBase groundTile = groundTilemap.GetTile(playerpos);
+        TileBase objectTile = objectTilemap.GetTile(playerpos);
+        if (groundTile == null)
         {
-            message += "null";
+            message += "none";
         }
         else
         {
-            message += " " + tile.name;
+            message += " " + groundTile.name;
         }
-        tileText.text = message;
+        message += " \n object tile: ";
+        if (objectTile == null)
+        {
+            message += "none";
+        }
+        else
+        {
+            message += " " + objectTile.name;
+        }
+        Debug.Log("UpdateTileManager -> \nplayer pos: " + player.transform.position
+            +"\n(1)");
+        gameManager.UpdateDebugText("tile", message.ToString());
     }
 }

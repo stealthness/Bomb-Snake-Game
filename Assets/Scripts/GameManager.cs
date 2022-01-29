@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI debugPosText;
+    public TextMeshProUGUI debugTileText;
 
     // Start is called before the first frame update
     void Start()
@@ -22,10 +23,14 @@ public class GameManager : MonoBehaviour
 
     public void UpdateDebugText(string name, string message)
     {
+        Debug.Log(message + "\n" +Random.Range(0, 1));
         switch (name)
         {
             case "position":
                 debugPosText.text = message;
+                break;
+            case "tile":
+                debugTileText.text = message;
                 break;
             default:
                 Debug.Log("no UI of that name " +message);
